@@ -25,7 +25,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
  
-    private static String REALM="MY_OAUTH_REALM";
+    private static final String REALM="MY_OAUTH_REALM";
      
     @Autowired
     private TokenStore tokenStore;
@@ -41,10 +41,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
  
         clients.inMemory()
-            .withClient("app-client")
+            .withClient("app-client")                
             .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-            .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-            .scopes("read", "write", "trust")
+            .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")                
+            .scopes("read", "write")
             .secret("app-passs")
             .accessTokenValiditySeconds(120).//Access token is only valid for 2 minutes.
             refreshTokenValiditySeconds(600);//Refresh token is only valid for 10 minutes.
