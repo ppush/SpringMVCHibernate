@@ -21,15 +21,18 @@ public class UserServiceImpl implements UserService{
 	@Autowired
     private PasswordEncoder passwordEncoder;
 	
+        @Override
 	public User findById(int id) {
 		return dao.findById(id);
 	}
 
+        @Override
 	public User findBySSO(String sso) {
 		User user = dao.findBySSO(sso);
 		return user;
 	}
 
+        @Override
 	public void saveUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		dao.save(user);
